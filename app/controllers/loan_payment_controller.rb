@@ -1,8 +1,8 @@
 class LoanPaymentController < ApplicationController
   def loan_payment
-    @apr = params.fetch("annual_percentage_rate").to_f
-    @years = params.fetch("number_of_years").to_i
-    @principal = params.fetch("principal_value").to_f
+    @apr = params.fetch("annual_percentage_rate").to_f #r
+    @years = params.fetch("number_of_years").to_i #N
+    @principal = params.fetch("principal_value").to_f #P
 
     # ================================================================================
     # Your code goes below.
@@ -10,12 +10,15 @@ class LoanPaymentController < ApplicationController
     # The number of years the user input is in the integer @years.
     # The principal value the user input is in the decimal @principal.
     # ================================================================================
-
-    @monthly_payment = "Replace this string with your answer"
-
-    # ================================================================================
-    # Your code goes above.
-    # ================================================================================
+    r = (@apr/12.0)
+    r = r/100
+    
+    p_ = @principal
+    
+    nn = @years*12
+    
+    @monthly_payment = (r*p_)/(1-(1+r)**(-nn))
+   
 
     render("loan_payment_templates/loan_payment.html.erb")
   end

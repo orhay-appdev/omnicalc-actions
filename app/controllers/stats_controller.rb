@@ -7,36 +7,60 @@ class StatsController < ApplicationController
     # The numbers the user input are in the array @numbers.
     # ================================================================================
 
-    @sorted_numbers = "Replace this string with your answer"
+    @sorted_numbers = @numbers.sort
 
-    @count = "Replace this string with your answer"
+    @count = @numbers.length
+    minimum = @numbers[0]
+    @numbers.each do |num|        
+     if num < minimum
+       minimum = num
+     end
+   end
+    @minimum = minimum
+    
+    maximum = minimum
+    @numbers.each do |num|        
+  if num > maximum
+    maximum = num
+  end
+end
+    @maximum = maximum
 
-    @minimum = "Replace this string with your answer"
-
-    @maximum = "Replace this string with your answer"
-
-    @range = "Replace this string with your answer"
+    @range = maximum-minimum
 
     # Median
     # ======
+    sorted = @numbers.sort
+    len = sorted.length
+    median = (sorted[(len - 1) / 2] + sorted[len / 2]) / 2.0
+    @median = median
+    
+    sum = 0
+    @numbers.each do |num|        
+    sum = sum + num
+    end
+    @sum = sum
 
-    @median = "Replace this string with your answer"
-
-    @sum = "Replace this string with your answer"
-
-    @mean = "Replace this string with your answer"
+    @mean = @sum/@count
 
     # Variance
     # ========
+    sum = 0
+    @numbers.each do |num|
+      sum += (num-@mean)**2
+    end
+     
+    @variance = sum/@count
 
-    @variance = "Replace this string with your answer"
-
-    @standard_deviation = "Replace this string with your answer"
+    @standard_deviation = @variance**0.5
 
     # Mode
     # ====
-
-    @mode = "Replace this string with your answer"
+    myarray = Hash.new(0)
+    @numbers.each do |num|
+      myarray[num] += 1
+      end
+    @mode = myarray.key(myarray.values.max)
 
     # ================================================================================
     # Your code goes above.
