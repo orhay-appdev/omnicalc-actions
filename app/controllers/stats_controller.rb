@@ -72,5 +72,4 @@ end
   def stats_form
     render("stats_templates/stats_form.html.erb")
   end
-  
 end

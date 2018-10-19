@@ -9,7 +9,11 @@ class ImageTagController < ApplicationController
     # ================================================================================
 
     @original_image_url = params.fetch("image_url")
-    @tag_hashes = "Replace with the array containing the hashes representing tags"
+    input = @original_image_url
+    client = Algorithmia.client('simbxe1zOTxjCwlDye3lRtytCzw1')
+    algo = client.algo('deeplearning/IllustrationTagger/0.4.0')
+    result = algo.pipe(input).result
+    @tag_hashes = result
 
     # ================================================================================
     # Your code goes above.
